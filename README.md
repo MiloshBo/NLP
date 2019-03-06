@@ -1,4 +1,4 @@
-# ngram are strings of words, for example 2-gram contains two words in a row
+# n-grams are strings of words, for example 2-gram contains two words in a row
 
 sources:
 
