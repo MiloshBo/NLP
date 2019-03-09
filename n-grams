@@ -1,0 +1,52 @@
+# https://www.kaggle.com/rtatman/tutorial-getting-n-grams
+# https://www.nltk.org/
+# http://www.nltk.org/book/
+
+import nltk, re, string, collections
+from nltk.util import ngrams     # function for making ngrams
+import requests
+import os
+
+# larz60+'s snippet
+response = requests.get("http://pythonscraping.com/files/inaugurationSpeech.txt")
+if response.status_code == 200:
+	content = response.text
+	tokenized = content.split()
+esBigrams = ngrams(tokenized, 2)
+
+
+def word_grams(words, min=1, max=4):
+    s = []
+    for n in range(min, max):
+        for ngram in ngrams(words, n):
+            s.append(' '.join(str(i) for i in ngram))
+    return s
+print(word_grams('one two three four'.split(' ')))
+
+
+with open(os.path.abspath("c:/Python36/kodovi/inauguration.txt"), "r") as file:
+	text = file.read()
+print(text[0:1000])
+# get rid of all the XML markup
+text = re.sub('<.*>','', text)
+# get rid of punctuation (except periods)
+punctuationNoPeriod = "[" + re.sub("\.", "", string.punctuation) + "]"
+text = re.sub(punctuationNoPeriod, "", text)
+print(text[0:1000])
+tokenized = text.split()
+esBigrams = ngrams(tokenized, 2)
+esBigramFreq = collections.Counter(esBigrams)
+print(esBigramFreq.most_common(10))
+
+
+url = 'http://pythonscraping.com/files/inaugurationSpeech.txt'
+file_name = os.path.basename(url)
+response = requests.get(url)
+with open(file_name, 'wb') as f:
+	f.write(response.content)
+
+
+	
+
+
+
