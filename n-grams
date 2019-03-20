@@ -62,6 +62,20 @@ t = treebank.parsed_sents('wsj_0001.mrg')[0]
 t.draw()
 
 	
+nltk.download()
+
+from nltk import word_tokenize
+from nltk import Text
+tokens = word_tokenize("Here is some not very interesting text")
+text = Text(tokens)
+#print(text)
 
 
+from nltk.book import *
+
+print(len(text6)/len(set(text6)))
+
+from nltk import FreqDist
+fdlist = FreqDist(text6)
+print(fdist.most_common(10))
 
